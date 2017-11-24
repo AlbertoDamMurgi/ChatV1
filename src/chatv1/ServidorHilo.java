@@ -41,6 +41,8 @@ public class ServidorHilo implements Runnable {
 
             mostrarSaludo();
 
+            new Thread(new ServidorEscribir(clientes)).start();
+
             while (!cadena.trim().equalsIgnoreCase("exit")&&!cadena.trim().equalsIgnoreCase("quit")&&cadena!=null){
 
                 cadena=IN.readLine().trim();
@@ -49,7 +51,7 @@ public class ServidorHilo implements Runnable {
 
                 System.out.println("<["+cliente.getNombre()+"]> "+cadena);
 
-
+                enviarMensaje(cadena);
 
 
 
@@ -60,6 +62,20 @@ public class ServidorHilo implements Runnable {
 
         } catch (IOException e) {
             e.printStackTrace();
+        }
+
+    }
+
+    private void enviarMensaje(String mensaje){
+
+        for (Cliente c : clientes) {
+
+            if(cliente!=c){
+
+                c.getSalida().println("<[Cliente "+id+"]> "+mensaje);
+
+            }
+
         }
 
     }

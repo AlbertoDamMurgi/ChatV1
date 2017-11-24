@@ -17,11 +17,7 @@ public class Servidor {
 
                new Thread(new ServidorHilo(server.accept(),clientes,id++)).start();
                System.out.println("Cliente Conectado.");
-               System.out.println("Numero total de clientes: "+clientes.size());
-
-
-
-
+               System.out.println("Numero total de clientes: "+(clientes.size()+1));
 
             }
 
